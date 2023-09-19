@@ -9,6 +9,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner:
+          false, //quitar la madre del debug pq me estorbaba
       title: 'peliculas',
       initialRoute: 'home',
       routes: {'home': (_) => HomeScreen(), 'details': (_) => DetailScreen()},
