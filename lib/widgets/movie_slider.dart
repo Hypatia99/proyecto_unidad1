@@ -51,7 +51,7 @@ class _MoviePoster extends StatelessWidget {
                 placeholder: AssetImage('assets/camarita.jpg'),
                 image: AssetImage('assets/camarita.jpg'),
                 width: 130,
-                height: 165,
+                height: 49,
               ),
             ),
           ),
