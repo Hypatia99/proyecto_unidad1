@@ -47,7 +47,7 @@ class _MoviePoster extends StatelessWidget {
             onTap: () => Navigator.pushNamed(context, 'details', arguments: ''),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: FadeInImage(
+              child: const FadeInImage(
                 placeholder: AssetImage('assets/camarita.jpg'),
                 image: AssetImage('assets/camarita.jpg'),
                 width: 130,
