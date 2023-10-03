@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 //extanciando la libreria
 import 'package:http/http.dart' as http;
+import 'package:proyecto_unidad1/models/now_playing_response.dart';
 
 //
 class MoviesProvider extends ChangeNotifier {
@@ -26,7 +27,10 @@ class MoviesProvider extends ChangeNotifier {
     //informacion del json
     //decode data recibe la informacion
     final Map<String, dynamic> decodeData = json.decode(response.body);
-    print(decodeData);
-    print(response.body);
+
+    final nowPlayingResponse = NowPlayingResponse.fromRawJson(response.body);
+    print(nowPlayingResponse.results[0].title);
+    //print(decodeData);
+    //print(response.body);
   }
 }

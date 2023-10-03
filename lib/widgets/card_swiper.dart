@@ -26,7 +26,7 @@ class CardSwiper extends StatelessWidget {
                     20), //Para hacer las esquinas redondeadas
                 child: const FadeInImage(
                   placeholder: AssetImage('assets/camarita.jpg'),
-                  image: NetworkImage('https://via.placeholder.com/300x400'),
+                  image: AssetImage('assets/camarita.jpg'),
                 ),
               ),
             );
