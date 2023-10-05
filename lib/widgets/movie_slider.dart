@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../models/movie.dart';
+
 class MovieSlider extends StatelessWidget {
-  const MovieSlider({super.key});
+  final List<Movie> movies;
+  final String? title; //opcional
+  const MovieSlider({super.key, required this.movies, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +26,8 @@ class MovieSlider extends StatelessWidget {
         Expanded(
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 20,
-            itemBuilder: (_, int index) => const _MoviePoster(),
+            itemCount: movies.length,
+            itemBuilder: (_, int index) => _MoviePoster(movie: movies[index]),
           ),
         )
       ]),
@@ -33,7 +37,8 @@ class MovieSlider extends StatelessWidget {
 
 //Crear las tarjetas
 class _MoviePoster extends StatelessWidget {
-  const _MoviePoster({super.key});
+  final Movie movie;
+  const _MoviePoster({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -47,17 +52,17 @@ class _MoviePoster extends StatelessWidget {
             onTap: () => Navigator.pushNamed(context, 'details', arguments: ''),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: const FadeInImage(
+              child: FadeInImage(
                 placeholder: AssetImage('assets/camarita.jpg'),
-                image: AssetImage('assets/camarita.jpg'),
+                image: NetworkImage(movie.fullPosterImg),
                 width: 130,
                 height: 49,
               ),
             ),
           ),
           const SizedBox(height: 5),
-          const Text(
-            'Pos ni supe q decia ahi pq creo taba en portugues',
+          Text(
+            movie.title,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
