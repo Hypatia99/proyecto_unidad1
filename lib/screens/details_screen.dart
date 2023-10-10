@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_unidad1/models/models.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({super.key});
@@ -6,15 +7,16 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //recibir argumentos de otra pantalla
-    final String movie =
-        ModalRoute.of(context)?.settings.arguments.toString() ?? 'sin nombre';
-    return const Scaffold(
+    final Movie movie = ModalRoute.of(context)?.settings.arguments as Movie;
+    return Scaffold(
         body: CustomScrollView(
       slivers: [
-        _CustomAppBar(),
+        _CustomAppBar(
+          movie: movie,
+        ),
         SliverList(
           delegate: SliverChildListDelegate.fixed(
-            [_PosterAndTitle(), _Overview(), MovieSlider2()],
+            [_PosterAndTitle(movie: movie), _Overview(), MovieSlider2()],
           ),
         )
       ],
@@ -23,7 +25,8 @@ class DetailScreen extends StatelessWidget {
 }
 
 class _CustomAppBar extends StatelessWidget {
-  const _CustomAppBar({super.key});
+  final Movie movie;
+  const _CustomAppBar({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +49,9 @@ class _CustomAppBar extends StatelessWidget {
             style: TextStyle(fontSize: 18),
           ),
         ),
-        background: const FadeInImage(
+        background: FadeInImage(
           placeholder: AssetImage('assets/loading.gif'),
-          image: AssetImage('assets/camarita.jpg'),
+          image: NetworkImage(movie.backImg),
         ),
       ),
     );
@@ -56,7 +59,8 @@ class _CustomAppBar extends StatelessWidget {
 }
 
 class _PosterAndTitle extends StatelessWidget {
-  const _PosterAndTitle({super.key});
+  final Movie movie;
+  const _PosterAndTitle({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -67,25 +71,25 @@ class _PosterAndTitle extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: const FadeInImage(
+            child: FadeInImage(
               placeholder: AssetImage('assets/camarita.jpg'),
-              image: AssetImage('assets/camarita.jpg'),
+              image: NetworkImage(movie.fullPosterImg),
               height: 250,
             ),
           ),
           const SizedBox(width: 20),
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'movie.title',
+                  movie.title,
                   style: TextStyle(fontSize: 30),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),
                 Text(
-                  'movie.titleOriginal',
+                  movie.originalTitle,
                   style: TextStyle(fontSize: 18),
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,

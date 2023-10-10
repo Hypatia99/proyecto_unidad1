@@ -40,6 +40,12 @@ class Movie {
     return 'https://i.stack.imgur.com/GNhxO.png'; //si no es nulo entra aca
   }
 
+  get backImg {
+    if (this.backdropPath != null)
+      return 'https://image.tmdb.org/t/p/w500${this.backdropPath}'; //si es nulo entra aqui
+    return 'https://i.stack.imgur.com/GNhxO.png'; //si no es nulo entra aca
+  }
+
   factory Movie.fromRawJson(String str) => Movie.fromJson(json.decode(str));
 
   //String toRawJson() => json.encode(toJson());

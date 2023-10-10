@@ -13,7 +13,7 @@ class MoviesProvider extends ChangeNotifier {
   String _apiKey = '9dc27117b000e7e5acfb365fa957971a';
   String _languague = 'es-MX';
 
-  List<Movie> onDisplayMovies = [];
+  List<Movie> onDisplayMovies = []; //lista de peliculas
   List<Movie> popularMovies = [];
   //contructor
   MoviesProvider() {
@@ -32,14 +32,14 @@ class MoviesProvider extends ChangeNotifier {
     //informacion del json
     //decode data recibe la informacion
     final Map<String, dynamic> decodeData = json.decode(response.body);
-
+//convirtiendo el json a una instancia
     final nowPlayingResponse = NowPlayingResponse.fromRawJson(response.body);
     onDisplayMovies = nowPlayingResponse.results;
 
     //avisarle a los widget que hubo modificacion, se cambio la data por lo tanto se tiene que redibujar.
     //very importante
     notifyListeners();
-    print(nowPlayingResponse.results[0].title);
+    //print(nowPlayingResponse.results[0].title);
     //print(decodeData);
     //print(response.body);
   }
